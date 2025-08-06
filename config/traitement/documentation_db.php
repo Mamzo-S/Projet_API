@@ -1,6 +1,6 @@
 <?php
 
-include '../database/database_connection.php';
+include_once __DIR__ . '/../database/database_connection.php';
 
 function addDocumentation($libelle, $desc){
     global $connection;
@@ -15,6 +15,7 @@ function getAllDocumentation(){
     $query = "SELECT * FROM documentation";
     $stmt = $connection->prepare($query);
     $stmt->execute();
+    return $stmt;
 }
 
 function deleteDocumentation($id){
@@ -27,7 +28,7 @@ function deleteDocumentation($id){
 
 function editDocumentation($id, $libelle, $desc){
     global $connection;
-    $query = "UPDATE documentation SET libelle=? descriptions=? where id = ?";
+    $query = "UPDATE documentation SET libelle=?, descriptions=? where id = ?";
     $stmt = $connection->prepare($query);
     $stmt -> execute([$libelle, $desc, $id]);
     $stmt -> closeCursor();

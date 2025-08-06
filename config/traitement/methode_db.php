@@ -1,6 +1,6 @@
 <?php
 
-include '../database/database_connection.php';
+include_once __DIR__ . '/../database/database_connection.php';
 
 function addMethode($method){
     global $connection;
@@ -15,6 +15,7 @@ function getMethode(){
     $query = "SELECT * FROM methode";
     $stmt = $connection->prepare($query);
     $stmt->execute();
+    return $stmt;
 }
 
 function deleteMethode($id){
@@ -27,7 +28,7 @@ function deleteMethode($id){
 
 function editMethode($method){
     global $connection;
-    $query = "UPDATE methode SET methode_name? where id = ?";
+    $query = "UPDATE methode SET methode_name=? where id = ?";
     $stmt = $connection->prepare($query);
     $stmt -> execute([$method]);
     $stmt -> closeCursor();

@@ -1,6 +1,6 @@
 <?php
 
-include '../database/database_connection.php';
+include_once __DIR__ . '/../database/database_connection.php';
 
 function addLien($lien){
     global $connection;
@@ -15,6 +15,7 @@ function getAllLien(){
     $query = "SELECT * FROM lien";
     $stmt = $connection->prepare($query);
     $stmt->execute();
+    return $stmt;
 }
 
 function deleteLien($id){
@@ -27,7 +28,7 @@ function deleteLien($id){
 
 function editLien($lien){
     global $connection;
-    $query = "UPDATE lien SET format? where id = ?";
+    $query = "UPDATE lien SET base_url=? where id = ?";
     $stmt = $connection->prepare($query);
     $stmt -> execute([$lien]);
     $stmt -> closeCursor();

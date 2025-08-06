@@ -1,6 +1,6 @@
 <?php
 
-include '../database/database_connection.php';
+include_once __DIR__ . '/../database/database_connection.php';
 
 function addAuthorization($lib){
     global $connection;
@@ -15,6 +15,7 @@ function getAuthorization(){
     $query = "SELECT * FROM type_authorization";
     $stmt = $connection->prepare($query);
     $stmt->execute();
+    return $stmt;
 }
 
 function deleteAuthorization($id){
@@ -27,7 +28,7 @@ function deleteAuthorization($id){
 
 function editAuthorization($lib){
     global $connection;
-    $query = "UPDATE type_authorization SET libelle? where id = ?";
+    $query = "UPDATE type_authorization SET libelle=? where id = ?";
     $stmt = $connection->prepare($query);
     $stmt -> execute([$lib]);
     $stmt -> closeCursor();

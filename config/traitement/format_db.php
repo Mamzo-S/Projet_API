@@ -1,6 +1,6 @@
 <?php
 
-include '../database/database_connection.php';
+include_once __DIR__ . '/../database/database_connection.php';
 
 function addFormat($format){
     global $connection;
@@ -15,6 +15,7 @@ function getAllFormat(){
     $query = "SELECT * FROM format";
     $stmt = $connection->prepare($query);
     $stmt->execute();
+    return $stmt;
 }
 
 function deleteFormat($id){
@@ -27,7 +28,7 @@ function deleteFormat($id){
 
 function editFormat($format){
     global $connection;
-    $query = "UPDATE format SET format? where id = ?";
+    $query = "UPDATE format SET format=? where id = ?";
     $stmt = $connection->prepare($query);
     $stmt -> execute([$format]);
     $stmt -> closeCursor();
